@@ -19,7 +19,7 @@ main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var
 <body>
 <div class="app">
 <aside class="sidebar">
- <div class="brand"><div><small>PERSONAL ASSISTANT</small><strong>GRACE<br>Professional Workspace</strong></div><span class="demo">BETA 0.4</span></div>
+ <div class="brand"><div><small>PERSONAL ASSISTANT</small><strong>GRACE<br>Professional Workspace</strong></div><span class="demo">BETA 0.5</span></div>
  <nav>
   <button class="navbtn active" data-page="dashboard"><span>⌂</span>Dashboard</button>
   <button class="navbtn" data-page="agenda"><span>▦</span>Agenda</button>
@@ -55,7 +55,7 @@ main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var
   </section>
 
   <section id="intelligence" class="page hidden">
-   <div class="pagehead"><div><div class="eyebrow">Daily Intelligence — Portfolio Edition</div><h1>Corporate Intelligence</h1><p class="sub">Una vista manageriale sulle novità che possono incidere sui gruppi del portafoglio.</p></div><button class="btn primary" onclick="alert('Nella prossima fase collegheremo le fonti e la generazione del briefing.')">＋ Genera briefing</button></div>
+   <div class="pagehead"><div><div class="eyebrow">Daily Intelligence — Portfolio Edition</div><h1>Corporate Intelligence</h1><p class="sub">Una vista manageriale sulle novità che possono incidere sui gruppi del portafoglio.</p></div><button class="btn primary" onclick="showExecutiveSummary()">＋ Apri Executive Summary</button></div>
    <div class="notice"><strong>Anteprima dimostrativa:</strong> le società e le notizie qui sotto sono inventate. Non sono notizie reali né monitoraggio automatico.</div>
    <div class="grid stats">
     <div class="card"><div class="statlabel">ALTA RILEVANZA</div><div class="statnum">2</div><div class="statnote">Esempi da approfondire</div></div>
@@ -63,7 +63,7 @@ main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var
     <div class="card"><div class="statlabel">GRUPPI OSSERVATI</div><div class="statnum">20</div><div class="statnote">Obiettivo a regime, non collegato</div></div>
     <div class="card"><div class="statlabel">ULTIMO AGGIORNAMENTO</div><div class="statnum" style="font-size:20px">Demo</div><div class="statnote">Nessun feed live collegato</div></div>
    </div>
-   <div class="card" style="margin-bottom:16px"><div class="sectiontitle"><h2>Executive Summary</h2><span class="pill amber">Esempio fittizio</span></div><p class="sub">Nel portafoglio dimostrativo emergono due temi da approfondire: un programma di investimenti industriali e una possibile operazione di rifinanziamento. Le informazioni non rappresentano eventi realmente accaduti.</p></div>
+   <div class="card" style="margin-bottom:16px"><div class="sectiontitle"><div><h2>Executive Summary</h2><p class="sub" style="margin-top:6px">Cinque evidenze dimostrative — seleziona una scheda per aprire l'analisi.</p></div><span class="pill amber">Dati fittizi</span></div><div class="notice" style="margin-top:12px;margin-bottom:12px">Contenuto esclusivamente dimostrativo: nessuna notizia reale, fonte esterna o aggiornamento automatico è collegato.</div><div id="executiveCards" class="grid" style="gap:10px"></div></div>
    <div class="grid two">
     <div class="card"><div class="sectiontitle"><h2>Portfolio Radar</h2><span class="pill">Cosa è cambiato</span></div>
      <div class="item"><div><strong>Alfa Industries — piano investimenti</strong><small>Fatto dimostrativo: ipotizzato nuovo investimento produttivo. Da verificare fabbisogno e tempi.</small><small><b>Implicazione GRACE:</b> possibile confronto su finanziamento capex.</small></div><span class="pill amber">Alta rilevanza</span></div>
@@ -118,7 +118,16 @@ function fmt(d){if(!d)return '—';let x=new Date(d+'T00:00:00');return x.toLoca
 function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(p).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===p));let names={dashboard:'Dashboard',agenda:'Agenda',intelligence:'Corporate Intelligence',meetings:'Meeting Assistant',archive:'Archivio',reports:'Report e documenti',settings:'Impostazioni'};document.getElementById('crumb').textContent=names[p];renderAll()}
 document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 let selectedMeeting=null;
-function renderAll(){renderDashboard();renderTasks();renderMeetings();renderCompanies()}
+const executiveItems=[
+ {title:'Alfa Industries — ipotesi di investimento produttivo',sector:'Industria / manifattura',date:'Esempio — data non reale',source:'Fonte dimostrativa',level:'Alta rilevanza',tone:'amber',fact:'Scenario ipotetico: il gruppo valuta un nuovo investimento per ampliare la capacità produttiva.',analysis:'Possibile esigenza di finanziamento capex, leasing o supporto nella pianificazione dei flussi. Da verificare con il cliente.',action:'Approfondire importo, tempistiche, coperture e autorizzazioni.'},
+ {title:'Beta Holding — possibile rifinanziamento',sector:'Servizi',date:'Esempio — data non reale',source:'Fonte dimostrativa',level:'Alta rilevanza',tone:'amber',fact:'Scenario ipotetico: revisione delle scadenze del debito nel medio termine.',analysis:'Possibile opportunità di refinancing e revisione della struttura finanziaria.',action:'Verificare scadenziario, covenant, pricing e fabbisogno.'},
+ {title:'Gamma Group — cambiamento nella governance',sector:'Servizi / holding',date:'Esempio — data non reale',source:'Fonte dimostrativa',level:'Da monitorare',tone:'',fact:'Scenario ipotetico: ingresso di una nuova figura manageriale nel gruppo.',analysis:'Il cambiamento potrebbe incidere sulle priorità strategiche e sulle interlocuzioni finanziarie.',action:'Monitorare comunicazioni ufficiali e aggiornare la mappa dei referenti.'},
+ {title:'Settore industriale — pressione sui costi',sector:'Industria',date:'Esempio — data non reale',source:'Fonte dimostrativa',level:'Da monitorare',tone:'',fact:'Scenario ipotetico: aumento dei costi energetici e delle materie prime.',analysis:'Possibile pressione su margini, capitale circolante e fabbisogno di liquidità.',action:'Valutare sensibilità dei margini e possibili esigenze di circolante.'},
+ {title:'Mercato del credito — contesto tassi',sector:'Macro / mercati',date:'Esempio — data non reale',source:'Fonte dimostrativa',level:'Contesto',tone:'',fact:'Esempio di tema macroeconomico da seguire: andamento dei tassi e condizioni di accesso al credito.',analysis:'Il contesto può influenzare decisioni di investimento, coperture e costo del debito.',action:'Considerare il tema nelle prossime interlocuzioni con i gruppi.'}
+];
+function renderExecutiveSummary(){const host=document.getElementById('executiveCards');if(!host)return;host.innerHTML=executiveItems.map((x,i)=>`<details style="border:1px solid var(--line);border-radius:9px;padding:13px 15px;background:#fff"><summary style="cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--navy);font-weight:700"><span>${i+1}. ${esc(x.title)}</span><span class="pill ${x.tone}">${esc(x.level)}</span></summary><div style="padding:13px 2px 2px;line-height:1.55"><div class="sub" style="margin-bottom:10px">${esc(x.sector)} · ${esc(x.date)} · ${esc(x.source)}</div><p><strong>Fatto dimostrativo:</strong> ${esc(x.fact)}</p><p><strong>Analisi GRACE:</strong> ${esc(x.analysis)}</p><p><strong>Possibile azione:</strong> ${esc(x.action)}</p></div></details>`).join('')}
+function showExecutiveSummary(){showPage('intelligence');document.querySelectorAll('#executiveCards details').forEach(d=>d.open=true);document.getElementById('executiveCards')?.scrollIntoView({behavior:'smooth',block:'start'})}
+function renderAll(){renderDashboard();renderTasks();renderMeetings();renderCompanies();renderExecutiveSummary()}
 function renderDashboard(){
  let open=data.tasks.filter(t=>!t.done),due=open.filter(t=>t.due&&t.due<=addDays(7));
  document.getElementById('statOpen').textContent=open.length;document.getElementById('statDue').textContent=due.length;document.getElementById('statMeet').textContent=data.meetings.length;document.getElementById('statCompanies').textContent=data.companies.length;
