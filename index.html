@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10243a">
-<title>Corporate RM Assistant — Demo 0.3</title>
+<title>GRACE — Personal Assistant</title>
 <style>
 :root{--navy:#10243a;--navy2:#183650;--blue:#2463a6;--cyan:#dcecf8;--bg:#f3f6fa;--ink:#182433;--muted:#687789;--line:#e2e8ef;--white:#fff;--green:#18794e;--amber:#a86612;--red:#b33b3b;--shadow:0 8px 24px rgba(16,36,58,.08)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
@@ -19,20 +19,23 @@ main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var
 <body>
 <div class="app">
 <aside class="sidebar">
- <div class="brand"><div><small>BANCA • WORKSPACE</small><strong>Corporate RM<br>Assistant</strong></div><span class="demo">DEMO 0.3</span></div>
+ <div class="brand"><div><small>PERSONAL ASSISTANT</small><strong>GRACE<br>Professional Workspace</strong></div><span class="demo">BETA 0.4</span></div>
  <nav>
   <button class="navbtn active" data-page="dashboard"><span>⌂</span>Dashboard</button>
   <button class="navbtn" data-page="agenda"><span>▦</span>Agenda</button>
+  <button class="navbtn" data-page="intelligence"><span>◈</span>Corporate Intelligence</button>
   <button class="navbtn" data-page="meetings"><span>▤</span>Meeting Assistant</button>
   <button class="navbtn" data-page="archive"><span>▣</span>Archivio</button>
+  <button class="navbtn" data-page="reports"><span>▧</span>Report e documenti</button>
+  <button class="navbtn" data-page="settings"><span>⚙</span>Impostazioni</button>
  </nav>
  <div class="sidefoot">Ambiente dimostrativo<br>Dati salvati su questo dispositivo</div>
 </aside>
 <main>
- <header class="topbar"><div class="crumb">Workspace / <strong id="crumb">Dashboard</strong></div><div class="topright"><span class="pill amber">DATI DEMO</span><div class="avatar">RM</div></div></header>
+ <header class="topbar"><div class="crumb">Workspace / <strong id="crumb">Dashboard</strong></div><div class="topright"><span class="pill amber">DATI DEMO</span><div class="avatar">G</div></div></header>
  <div class="content">
   <section id="dashboard" class="page">
-   <div class="pagehead"><div><div class="eyebrow">Panoramica operativa</div><h1>Buongiorno, benvenuto.</h1><p class="sub">Il tuo spazio di lavoro per organizzare attività, incontri e informazioni corporate.</p></div><button class="btn primary" onclick="openTask()">＋ Nuova attività</button></div>
+   <div class="pagehead"><div><div class="eyebrow">Panoramica operativa</div><h1>Buongiorno, sono Grace.</h1><p class="sub">La tua assistente personale per organizzare attività, incontri e informazioni professionali. In futuro potremo aggiungere anche gli impegni privati.</p></div><button class="btn primary" onclick="openTask()">＋ Nuova attività</button></div>
    <div class="grid stats">
     <div class="card"><div class="statlabel">ATTIVITÀ APERTE</div><div class="statnum" id="statOpen">0</div><div class="statnote">Da gestire</div></div>
     <div class="card"><div class="statlabel">IN SCADENZA</div><div class="statnum" id="statDue">0</div><div class="statnote">Entro 7 giorni</div></div>
@@ -50,6 +53,33 @@ main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var
    <div class="pagehead"><div><div class="eyebrow">Pianificazione e follow-up</div><h1>Agenda</h1><p class="sub">Attività, appuntamenti, scadenze e prossime azioni.</p></div><button class="btn primary" onclick="openTask()">＋ Nuova attività</button></div>
    <div class="panel"><div class="toolbar"><input id="taskSearch" class="search" placeholder="Cerca attività..." oninput="renderTasks()"><select id="taskFilter" class="search" style="min-width:160px" onchange="renderTasks()"><option value="all">Tutte le attività</option><option value="open">Aperte</option><option value="done">Completate</option></select></div><div class="tablewrap"><table><thead><tr><th>Attività</th><th>Gruppo / Cliente</th><th>Scadenza</th><th>Priorità</th><th>Stato</th><th></th></tr></thead><tbody id="taskRows"></tbody></table></div></div>
   </section>
+
+  <section id="intelligence" class="page hidden">
+   <div class="pagehead"><div><div class="eyebrow">Daily Intelligence — Portfolio Edition</div><h1>Corporate Intelligence</h1><p class="sub">Una vista manageriale sulle novità che possono incidere sui gruppi del portafoglio.</p></div><button class="btn primary" onclick="alert('Nella prossima fase collegheremo le fonti e la generazione del briefing.')">＋ Genera briefing</button></div>
+   <div class="notice"><strong>Anteprima dimostrativa:</strong> le società e le notizie qui sotto sono inventate. Non sono notizie reali né monitoraggio automatico.</div>
+   <div class="grid stats">
+    <div class="card"><div class="statlabel">ALTA RILEVANZA</div><div class="statnum">2</div><div class="statnote">Esempi da approfondire</div></div>
+    <div class="card"><div class="statlabel">DA MONITORARE</div><div class="statnum">3</div><div class="statnote">Esempi di sviluppi</div></div>
+    <div class="card"><div class="statlabel">GRUPPI OSSERVATI</div><div class="statnum">20</div><div class="statnote">Obiettivo a regime, non collegato</div></div>
+    <div class="card"><div class="statlabel">ULTIMO AGGIORNAMENTO</div><div class="statnum" style="font-size:20px">Demo</div><div class="statnote">Nessun feed live collegato</div></div>
+   </div>
+   <div class="card" style="margin-bottom:16px"><div class="sectiontitle"><h2>Executive Summary</h2><span class="pill amber">Esempio fittizio</span></div><p class="sub">Nel portafoglio dimostrativo emergono due temi da approfondire: un programma di investimenti industriali e una possibile operazione di rifinanziamento. Le informazioni non rappresentano eventi realmente accaduti.</p></div>
+   <div class="grid two">
+    <div class="card"><div class="sectiontitle"><h2>Portfolio Radar</h2><span class="pill">Cosa è cambiato</span></div>
+     <div class="item"><div><strong>Alfa Industries — piano investimenti</strong><small>Fatto dimostrativo: ipotizzato nuovo investimento produttivo. Da verificare fabbisogno e tempi.</small><small><b>Implicazione GRACE:</b> possibile confronto su finanziamento capex.</small></div><span class="pill amber">Alta rilevanza</span></div>
+     <div class="item"><div><strong>Beta Holding — scadenze finanziarie</strong><small>Fatto dimostrativo: ipotizzata revisione delle linee a medio termine.</small><small><b>Implicazione GRACE:</b> approfondire calendario e alternative di refinancing.</small></div><span class="pill amber">Alta rilevanza</span></div>
+     <div class="item"><div><strong>Gamma Group — governance</strong><small>Fatto dimostrativo: ipotizzato ingresso di un nuovo manager.</small></div><span class="pill">Da monitorare</span></div>
+    </div>
+    <div class="card"><div class="sectiontitle"><h2>Financing & M&A</h2><span class="pill">Esempi</span></div>
+     <div class="item"><div><strong>Mercato obbligazionario</strong><small>Esempio di tema: emissioni, scadenze e rifinanziamenti nel settore.</small></div><span class="pill">Contesto</span></div>
+     <div class="item"><div><strong>Operazioni straordinarie</strong><small>Esempio di tema: acquisizioni, dismissioni e partnership.</small></div><span class="pill">Da monitorare</span></div>
+     <div class="item"><div><strong>Settori e macro</strong><small>Esempio di tema: tassi, domanda, prezzi delle materie prime e impatto sui margini.</small></div><span class="pill">Contesto</span></div>
+    </div>
+   </div>
+   <div class="card" style="margin-top:16px"><div class="sectiontitle"><h2>Struttura del briefing</h2></div><p class="sub">1. Executive Summary · 2. Portfolio Radar · 3. M&A e Financing · 4. Sector Intelligence · 5. Macro & Markets · 6. GRACE Insights · 7. Agenda Intelligence.</p><p class="sub" style="margin-top:10px">Ogni notizia, nella versione collegata alle fonti, dovrà riportare società, settore, data, fonte e link originale, distinguendo fatti verificati da analisi e inferenze.</p></div>
+  </section>
+  <section id="reports" class="page hidden"><div class="pagehead"><div><div class="eyebrow">Produzione documentale</div><h1>Report e documenti</h1><p class="sub">Briefing, schede aziendali, analisi e documenti pronti per l'utilizzo.</p></div></div><div class="card"><span class="pill">In sviluppo</span><h2>La tua area di produzione</h2><p class="sub">Qui potremo preparare schede gruppo, report di relazione, analisi settoriali, briefing per incontri e documenti esportabili. Nessuna generazione automatica è ancora attiva.</p></div></section>
+  <section id="settings" class="page hidden"><div class="pagehead"><div><div class="eyebrow">Preferenze workspace</div><h1>Impostazioni</h1><p class="sub">Informazioni sulla versione e sulle modalità di utilizzo.</p></div></div><div class="card"><span class="pill green">Beta dimostrativa</span><h2>GRACE — Personal Assistant</h2><p class="sub">Questa versione usa dati dimostrativi e archivia le modifiche nel browser del dispositivo. Non esiste ancora sincronizzazione tra dispositivi, autenticazione o collegamento a fonti esterne.</p><p class="sub" style="margin-top:10px"><strong>Regola di utilizzo:</strong> non inserire dati riservati, personali o informazioni di clienti reali in questa demo.</p></div></section>
 
   <section id="meetings" class="page hidden">
    <div class="pagehead"><div><div class="eyebrow">Preparazione e verbalizzazione</div><h1>Meeting Assistant</h1><p class="sub">Raccogli obiettivi, punti discussi, decisioni e follow-up.</p></div><button class="btn primary" onclick="openMeeting()">＋ Nuovo incontro</button></div>
@@ -85,7 +115,7 @@ let data=JSON.parse(localStorage.getItem(KEY)||'null')||{
 function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmt(d){if(!d)return '—';let x=new Date(d+'T00:00:00');return x.toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'})}
-function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(p).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===p));let names={dashboard:'Dashboard',agenda:'Agenda',meetings:'Meeting Assistant',archive:'Archivio'};document.getElementById('crumb').textContent=names[p];renderAll()}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(p).classList.remove('hidden');document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===p));let names={dashboard:'Dashboard',agenda:'Agenda',intelligence:'Corporate Intelligence',meetings:'Meeting Assistant',archive:'Archivio',reports:'Report e documenti',settings:'Impostazioni'};document.getElementById('crumb').textContent=names[p];renderAll()}
 document.querySelectorAll('.navbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 let selectedMeeting=null;
 function renderAll(){renderDashboard();renderTasks();renderMeetings();renderCompanies()}
